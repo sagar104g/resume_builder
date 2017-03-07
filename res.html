@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>login</title>
+</head>
+<body>
+<div align="center"><h1>LOGIN USER</h1></div>
+<div align="center">
+<br><br><br>
+<p>User Name: </p>
+<input id="username" type="text" ><br><br>
+<input id="password" type="password" ><br><br>
+<button id="login">Login</button><br><br>
+<button id="register">New User? Register</button>
+</div>
+<script type="text/javascript">
+var arr4 = [];
+	
+	document.getElementById("login").addEventListener("click",check);
+	document.getElementById("register").addEventListener("click",go);
+	function check() {
+		var username=document.getElementById("username").value;
+	    var password=document.getElementById("password").value;
+		var prevData=localStorage.getItem("users1");
+		   arr4=JSON.parse(prevData);
+		if(arr4!=null){
+			console.log(arr4);
+			var flag=0;
+			for(var i=0;i<arr4.length;i++){
+			if(arr4[i].name==username&&arr4[i].password==password){
+				flag=1;
+				sessionStorage.setItem('user_in', username);
+				event.preventDefault();
+				window.location="home.html";
+			}
+		}
+		if(flag==0){
+			alert("WRONG cOMMBINATION TRY AGAIN..");
+		}	
+	}else{
+			alert("WRONG COMMBINATION TRY AGAIN..");
+	}
+	}
+	function go() {
+		window.location="register.html"
+	}
+
+</script>
+</body>
+</html>

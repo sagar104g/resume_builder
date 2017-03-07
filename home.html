@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Home</title>
+</head>
+<body>
+<button id="log">logout</button>
+<p id="un"></p>
+<div align="center" >
+<form id="form1" >
+<fieldset>
+<legend>Fill Details</legend>
+    <b>Full Name</b><br>
+    <input type="text" id="input1" required><br><br>
+
+    <b>Post</b><br>
+    <input type="text" id="input2" required><br><br>
+
+    <b>E-mail</b><br>
+    <input type="text" id="input3" required><br><br>
+
+    <b>Mobile Number</b><br>
+    <input type="text" id="input4" required><br><br>
+
+    <b>Address</b><br>
+    <input type="text" id="input5" required><br><br>
+    <br><br><br>
+    <b>EDUCATION</b><br><br><br>
+    <b>10 nth</b><br>
+    <fieldset>
+    <b>year of passing</b>
+    <input type="text" id="input6" ><br><br>
+    <b>cgpa/percentage</b>
+    <input type="text" id="input7" ><br><br>
+    </fieldset>
+    <b>12 th</b><br>
+    <fieldset>
+    <b>year of passing</b>
+    <input type="text" id="input8" ><br><br>
+    <b>cgpa/percentage</b>
+    <input type="text" id="input9" ><br><br>
+    </fieldset>
+    <b>b.tech</b><br>
+    <fieldset>
+    <b>year of passing</b>
+    <input type="text" id="input10" ><br><br>
+    <b>cgpa/percentage</b>
+    <input type="text" id="input11" ><br><br>
+    </fieldset>
+    <button id="save">SUBMIT</button>
+    </fieldset>
+</form>
+<button id="high">show resume</button>
+</div>
+
+<script type="text/javascript">
+var arr4 = [];
+var arr5 = [];
+    document.getElementById("high").addEventListener("click",go);
+	var ans = sessionStorage.getItem('user_in');
+	document.getElementById("un").innerHTML="Hello, Mr."+ans;
+	document.getElementById("save").addEventListener("click",save_data);
+	function go() {
+		window.location="show.html";
+	}
+	document.getElementById("log").addEventListener("click",back);
+	function back() {
+		sessionStorage.clear();
+		window.location="res.html"
+	}
+	function save_data() {
+	var a=document.getElementById("input1").value;
+    var b=document.getElementById("input2").value;
+    var c=document.getElementById("input3").value;
+    var d=document.getElementById("input4").value;
+    var e=document.getElementById("input5").value;
+    var f=document.getElementById("input6").value;
+    var g=document.getElementById("input7").value;
+    var h=document.getElementById("input8").value;
+    var i=document.getElementById("input9").value;
+    var j=document.getElementById("input10").value;
+    var k=document.getElementById("input11").value;
+    var flag=1;
+    if(f.length!=0&&g.length==0){
+    	flag=0;
+    }
+   if(f.length==0&&g.length!=0){
+    	flag=0;
+    }
+    if(h.length!=0&&i.length==0){
+    	flag=0;
+    }
+    if(h.length==0&&i.length!=0){
+    	flag=0;
+    }
+    if(j.length!=0&&k.length==0){
+    	flag=0;
+    }
+    if(j.length==0&&k.length!=0){
+   	flag=0;
+    }
+    if(flag==0){
+    	alert("fill data carefully!!!!");
+    }
+    if(a.length!=0&&b.length!=0&&c.length!=0&&d.length!=0&&e.length!=0&&flag==1){
+    	var prevData1=localStorage.getItem("builder");
+					arr4=JSON.parse(prevData1);
+					console.log(arr4);
+					var q=0;
+					if(arr4!=null){
+						for(var i=0;i<arr4.length;i++,q++){
+						arr5[q]={
+						fullname : arr4[i].fullname,
+						post : arr4[i].post,
+						email : arr4[i].email,
+						mob : arr4[i].mob,
+						add : arr4[i].add,
+						user : arr4[i].user,
+						tnthyp : arr4[i].tnthyp,
+						tnthcp : arr4[i].tnthcp,
+						twlthyp : arr4[i].twlthyp,
+						twlthcp : arr4[i].twlthcp,
+						btechyp : arr4[i].btechyp,
+						btechcp : arr4[i].btechcp
+					};
+				}
+						}
+						arr5[q]={
+						fullname : a,
+						post : b,
+						email : c,
+						mob : d,
+						add : e,
+						user : ans,
+						tnthyp : f,
+						tnthcp : g,
+						twlthyp : h,
+						twlthcp : i,
+						btechyp : j,
+						btechcp : k
+					};
+					//show
+					localStorage.setItem('builder', JSON.stringify(arr5));
+					event.preventDefault();
+				window.location="show.html";
+					
+	}
+
+}
+
+</script>
+</body>
+</html>

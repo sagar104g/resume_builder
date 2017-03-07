@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>register</title>
+</head>
+<body>
+<div align="center" >
+<form id="form1" onsubmit="return check()">
+<fieldset>
+<legend>Register Form</legend>
+    <b>Username</b><br>
+    <input type="text" id="input1" required><br><br>
+
+    <b>Password</b><br>
+    <input type="password" id="input2" required><br><br>
+        
+   <b>confirm Password</b><br>
+    <input type="password" id="input3" required><br><br>
+
+    <button id="button1">Sign Up</button><br>
+    
+    <button id="login">Already a User? Login.</button>
+    </fieldset>
+</form>
+</div>
+<script type="text/javascript">
+var i=0;
+var arr = [],j=0;
+var arr1=[]; 
+var button1=document.getElementById("button1");
+document.getElementById("login").addEventListener("click",go);
+function go() {
+	event.preventDefault();
+	window.location="res.html";
+}
+function check(){
+    var a=document.getElementById("input1").value;
+    var b=document.getElementById("input2").value;
+    var c=document.getElementById("input3").value;
+    if(a.length>=6){
+var flag=0;
+                    i=i+1;
+                    var prevData1=localStorage.getItem("users1");
+					arr1=JSON.parse(prevData1);
+					for(var i=0;i<arr1.length;i++){
+						if(arr1[i].name==a&&arr1[i].password==b){
+							flag=1;
+							alert("user already present");
+						}
+					}
+					console.log(arr1);
+					var q=0;
+					if(flag==0){
+					if(arr1!=null){
+					for (q = 0; q < arr1.length; q++) {
+						arr[q]={
+						id : arr1[q].id,
+						name : arr1[q].name,
+						password : arr1[q].password
+					};
+					}
+				}						
+						arr[q]={
+
+						id : i,
+						name : a,
+						password : b
+					};
+					console.log(arr);
+                    localStorage.setItem('users1', JSON.stringify(arr));
+                    go();
+                }
+                
+            }else alert("The username must contain atleast 6 letters.");
+}
+</script>
+</body>
+</html>
